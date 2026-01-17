@@ -67,8 +67,12 @@ pxl_add_custom_widget(
                                 array(
                                     'name' => 'video_url',
                                     'label' => esc_html__('YouTube Video URL', 'konstruc'),
-                                    'type' => \Elementor\Controls_Manager::TEXT,
+                                    'type' => \Elementor\Controls_Manager::URL,
                                     'label_block' => true,
+                                    'show_external' => false,
+                                    'default' => [
+                                        'url' => '',
+                                    ],
                                     'placeholder' => esc_html__('https://www.youtube.com/watch?v=...', 'konstruc'),
                                     'condition' => [
                                         'media_type' => 'video',

@@ -57,9 +57,15 @@ if(isset($settings['slide_home']) && !empty($settings['slide_home']) && count($s
                     $button_link_2 = isset($value['button_link2']) ? $value['button_link2'] : '';
                     $media_type = isset($value['media_type']) ? $value['media_type'] : 'image';
                     $video_url = isset($value['video_url']) ? $value['video_url'] : '';
+                    $video_url_value = '';
+                    if (is_array($video_url)) {
+                        $video_url_value = isset($video_url['url']) ? $video_url['url'] : '';
+                    } else {
+                        $video_url_value = $video_url;
+                    }
                     $video_embed = '';
-                    if ($media_type === 'video' && !empty($video_url)) {
-                        $video_embed = wp_oembed_get($video_url);
+                    if ($media_type === 'video' && !empty($video_url_value)) {
+                        $video_embed = wp_oembed_get($video_url_value);
                     }
 
 
