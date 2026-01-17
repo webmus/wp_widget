@@ -55,11 +55,23 @@ if(isset($settings['slide_home']) && !empty($settings['slide_home']) && count($s
                     $text_button_2 = isset($value['text_button_2']) ? $value['text_button_2'] : '';
                     $button_link = isset($value['button_link']) ? $value['button_link'] : '';
                     $button_link_2 = isset($value['button_link2']) ? $value['button_link2'] : '';
+                    $media_type = isset($value['media_type']) ? $value['media_type'] : 'image';
+                    $video_url = isset($value['video_url']) ? $value['video_url'] : '';
+                    $video_embed = '';
+                    if ($media_type === 'video' && !empty($video_url)) {
+                        $video_embed = wp_oembed_get($video_url);
+                    }
 
 
                     ?>
                     <div class="pxl-swiper-slide elementor-repeater-item-<?php echo esc_attr($value['_id']); ?>">
-                        <div class="pxl-item--overlay"></div>
+                        <?php if ($media_type === 'video' && !empty($video_embed)) : ?>
+                            <div class="pxl-item--video">
+                                <?php echo $video_embed; ?>
+                            </div>
+                        <?php else : ?>
+                            <div class="pxl-item--overlay"></div>
+                        <?php endif; ?>
                         <div class="pxl-item--inner <?php echo esc_attr($settings['pxl_animate']); ?>" data-wow-delay="<?php echo esc_attr($settings['pxl_animate_delay']); ?>ms">
 
                             <div class="pxl-item--content">
