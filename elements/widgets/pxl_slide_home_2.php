@@ -45,11 +45,34 @@ pxl_add_custom_widget(
                             'type' => \Elementor\Controls_Manager::REPEATER,
                             'controls' => array(
                                 array(
+                                    'name' => 'media_type',
+                                    'label' => esc_html__('Media Type', 'konstruc'),
+                                    'type' => \Elementor\Controls_Manager::SELECT,
+                                    'default' => 'image',
+                                    'options' => [
+                                        'image' => esc_html__('Image', 'konstruc'),
+                                        'video' => esc_html__('Video (YouTube)', 'konstruc'),
+                                    ],
+                                ),
+                                array(
                                     'name'  => 'bg_image',
                                     'label' => esc_html__('Background Image','konstruc'),
                                     'type'  => \Elementor\Group_Control_Background::get_type(),
                                     'control_type'  => 'group',
                                     'selector'  => '{{WRAPPER}} .pxl-slide--home {{CURRENT_ITEM}} .pxl-item--overlay',
+                                    'condition' => [
+                                        'media_type' => 'image',
+                                    ],
+                                ),
+                                array(
+                                    'name' => 'video_url',
+                                    'label' => esc_html__('YouTube Video URL', 'konstruc'),
+                                    'type' => \Elementor\Controls_Manager::TEXT,
+                                    'label_block' => true,
+                                    'placeholder' => esc_html__('https://www.youtube.com/watch?v=...', 'konstruc'),
+                                    'condition' => [
+                                        'media_type' => 'video',
+                                    ],
                                 ),
                                 
                                 
